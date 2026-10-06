@@ -20,7 +20,6 @@ async function explore() {
   console.log('Enlaces relevantes en datosabiertos.php:');
   console.log(relevant);
 
-  // También buscar texto asociado
   const aRegex = /<a\s+[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gis;
   let match;
   while ((match = aRegex.exec(html)) !== null) {

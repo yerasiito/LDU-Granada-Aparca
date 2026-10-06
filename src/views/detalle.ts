@@ -36,28 +36,29 @@ export function renderDetalle(zonaId: string): void {
   // Explicación del ranking
   let explicacion = '';
   if (zona.esRecomendada || (recomendada && zona.id === recomendada.id)) {
-    // Check empate
     const empateZona = calculadas.find(
       (z) => z.id !== zona.id && z.puntuacion === zona.puntuacion
     );
     if (empateZona) {
       explicacion = `
         <div class="ga-explanation">
-          Empata con ${empateZona.nombre} en puntuación.<br>
-          Se elige ${zona.nombre} por su menor ocupación estimada.
+          Empata con ${empateZona.nombre} en puntuación (${zona.puntuacion} min).<br>
+          Se elige ${zona.nombre} por su menor ocupación estimada (${zona.porcentaje}% vs ${empateZona.porcentaje}%).
         </div>
       `;
     } else {
       explicacion = `
         <div class="ga-explanation">
-          👑 <strong>Opción recomendada:</strong> Menor tiempo combinado de acceso y búsqueda (${zona.puntuacion} min totales).
+          👑 <strong>Opción recomendada:</strong> Menor tiempo combinado de conducción desde ETSIIT y caminata al Ayuntamiento (${zona.puntuacion} min totales).
         </div>
       `;
     }
   } else {
     explicacion = `
       <div class="ga-explanation">
-        ${zona.nivel === 'rojo' ? '⚠️ Alta ocupación prevista.' : 'Alternativa viable: ' + zona.pieMins + ' min a pie de tu destino.'}
+        ${zona.nivel === 'rojo' 
+          ? '⚠️ Alta ocupación prevista.' 
+          : `Alternativa: ${zona.cocheMins} min coche + ${zona.pieMins} min a pie al Ayuntamiento.`}
       </div>
     `;
   }
@@ -65,9 +66,9 @@ export function renderDetalle(zonaId: string): void {
   container.innerHTML = `
     <!-- Status bar -->
     <div class="ga-status-bar">
-      <span class="ga-time">${esReal ? '11:43' : '18:00'}</span>
+      <span class="ga-time">${esReal ? state.horaConsulta : '18:00'}</span>
       <span class="ga-demo-badge" style="${esReal ? 'background: #2D6A3F; color: white;' : ''}">
-        ${esReal ? 'DATOS REALES' : 'DEMO'}
+        ${esReal ? 'CASO REAL YERAY' : 'DEMO RETO 07'}
       </span>
     </div>
 
@@ -80,7 +81,7 @@ export function renderDetalle(zonaId: string): void {
 
     <!-- Tarjeta de previsión grande -->
     <div class="ga-prevision-card">
-      <div class="ga-prevision-label">PREVISIÓN A LLEGADA (+15 MIN)</div>
+      <div class="ga-prevision-label">PREVISIÓN A LA LLEGADA (${esReal ? state.horaLlegada : '18:15'})</div>
       <div class="ga-prevision-big">${zona.porcentaje} %</div>
       <div class="ga-prevision-badge" style="background: ${colors.badgeBg}; color: ${colors.badgeColor}">
         ${zona.etiqueta}
@@ -92,11 +93,11 @@ export function renderDetalle(zonaId: string): void {
     <!-- Comparativa ahora vs llegada -->
     <div class="ga-compare-row">
       <div class="ga-compare-box">
-        <div class="ga-compare-label">AHORA (${esReal ? 'AFORO REAL' : '18:00'})</div>
+        <div class="ga-compare-label">AHORA (${esReal ? state.horaConsulta : '18:00'})</div>
         <div class="ga-compare-value">${porcAhora} %</div>
       </div>
       <div class="ga-compare-box">
-        <div class="ga-compare-label">A TU LLEGADA</div>
+        <div class="ga-compare-label">A TU LLEGADA (${esReal ? state.horaLlegada : '18:15'})</div>
         <div class="ga-compare-value ga-compare-arrival">${zona.porcentaje} %</div>
       </div>
     </div>
@@ -104,11 +105,11 @@ export function renderDetalle(zonaId: string): void {
     <!-- Tiempos y capacidad -->
     <div class="ga-times-card">
       <div class="ga-times-row">
-        <span class="ga-time-value">${zona.cocheMins} min coche</span>
-        <span class="ga-time-value">${zona.pieMins} min a pie</span>
+        <span class="ga-time-value">🚗 ${zona.cocheMins} min desde ETSIIT</span>
+        <span class="ga-time-value">🚶 ${zona.pieMins} min a pie al Ayto</span>
       </div>
       <div class="ga-times-disclaimer">
-        Capacidad total: <strong>${zona.capacidad} plazas</strong> · Libres actuales: <strong>${zona.capacidad - zona.ocupadasAhora}</strong>
+        Capacidad: <strong>${zona.capacidad} plazas</strong> · Libres actuales: <strong>${zona.capacidad - zona.ocupadasAhora}</strong>
       </div>
     </div>
 
@@ -143,7 +144,7 @@ export function renderDetalle(zonaId: string): void {
       toastEl.innerHTML = `
         <div class="d-flex">
           <div class="toast-body d-flex align-items-center gap-2">
-            <strong>Navegación simulada</strong> — En la versión final se abriría la ruta hacia ${zona.nombre}.
+            <strong>Navegación simulada</strong> — En la versión final se abriría la ruta desde ETSIIT hacia ${zona.nombre}.
           </div>
           <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
         </div>
