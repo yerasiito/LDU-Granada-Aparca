@@ -1,0 +1,23 @@
+{
+  "name": "ldu",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "node scripts/probar_caso_real.js",
+    "update-data": "node scripts/fetch_real_data.js"
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^5.2.11",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1"
+  }
+}

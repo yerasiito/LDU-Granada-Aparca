@@ -10,7 +10,17 @@ export function renderDetalle(zonaId: string): void {
   const zonas = getZonasActivas();
   const zonaData = zonas.find((z) => z.id === zonaId);
   if (!zonaData) {
-    container.innerHTML = `<div class="ga-empty-state">Zona no encontrada</div>`;
+    container.innerHTML = `
+      <div class="ga-status-bar">
+        <span class="ga-time">--:--</span>
+        <button class="btn btn-sm btn-outline-secondary" onclick="window.history.back()">‹ Volver</button>
+      </div>
+      <div class="ga-empty-state p-4 text-center">
+        <h5>Zona no encontrada</h5>
+        <button class="btn btn-primary mt-2" id="detalle-empty-back">Volver al inicio</button>
+      </div>
+    `;
+    document.getElementById('detalle-empty-back')?.addEventListener('click', () => navigateTo('inicio'));
     return;
   }
 
@@ -18,6 +28,7 @@ export function renderDetalle(zonaId: string): void {
   const colors = getColorNivel(zona.nivel);
   const calculadas = recomendarZonas(zonas);
   const recomendada = calculadas[0];
+  const esReal = state.modoDatos === 'real';
 
   // Porcentaje actual
   const porcAhora = Math.round((100 * zona.ocupadasAhora) / zona.capacidad);
@@ -33,14 +44,20 @@ export function renderDetalle(zonaId: string): void {
       explicacion = `
         <div class="ga-explanation">
           Empata con ${empateZona.nombre} en puntuación.<br>
-          Se elige ${zona.nombre} por su menor ocupación.
+          Se elige ${zona.nombre} por su menor ocupación estimada.
+        </div>
+      `;
+    } else {
+      explicacion = `
+        <div class="ga-explanation">
+          👑 <strong>Opción recomendada:</strong> Menor tiempo combinado de acceso y búsqueda (${zona.puntuacion} min totales).
         </div>
       `;
     }
   } else {
     explicacion = `
       <div class="ga-explanation">
-        ${zona.nivel === 'rojo' ? 'Alta ocupación prevista.' : 'Menos saturada que A, pero más lejos.'}
+        ${zona.nivel === 'rojo' ? '⚠️ Alta ocupación prevista.' : 'Alternativa viable: ' + zona.pieMins + ' min a pie de tu destino.'}
       </div>
     `;
   }
@@ -48,8 +65,10 @@ export function renderDetalle(zonaId: string): void {
   container.innerHTML = `
     <!-- Status bar -->
     <div class="ga-status-bar">
-      <span class="ga-time">18:00</span>
-      <span class="ga-demo-badge">DEMO</span>
+      <span class="ga-time">${esReal ? '11:43' : '18:00'}</span>
+      <span class="ga-demo-badge" style="${esReal ? 'background: #2D6A3F; color: white;' : ''}">
+        ${esReal ? 'DATOS REALES' : 'DEMO'}
+      </span>
     </div>
 
     <!-- Header con volver -->
@@ -61,7 +80,7 @@ export function renderDetalle(zonaId: string): void {
 
     <!-- Tarjeta de previsión grande -->
     <div class="ga-prevision-card">
-      <div class="ga-prevision-label">PREVISIÓN A LAS 18:15</div>
+      <div class="ga-prevision-label">PREVISIÓN A LLEGADA (+15 MIN)</div>
       <div class="ga-prevision-big">${zona.porcentaje} %</div>
       <div class="ga-prevision-badge" style="background: ${colors.badgeBg}; color: ${colors.badgeColor}">
         ${zona.etiqueta}
@@ -73,7 +92,7 @@ export function renderDetalle(zonaId: string): void {
     <!-- Comparativa ahora vs llegada -->
     <div class="ga-compare-row">
       <div class="ga-compare-box">
-        <div class="ga-compare-label">AHORA · 18:00</div>
+        <div class="ga-compare-label">AHORA (${esReal ? 'AFORO REAL' : '18:00'})</div>
         <div class="ga-compare-value">${porcAhora} %</div>
       </div>
       <div class="ga-compare-box">
@@ -82,13 +101,15 @@ export function renderDetalle(zonaId: string): void {
       </div>
     </div>
 
-    <!-- Tiempos -->
+    <!-- Tiempos y capacidad -->
     <div class="ga-times-card">
       <div class="ga-times-row">
-        <span class="ga-time-value">${zona.cocheMins} min en coche</span>
+        <span class="ga-time-value">${zona.cocheMins} min coche</span>
         <span class="ga-time-value">${zona.pieMins} min a pie</span>
       </div>
-      <div class="ga-times-disclaimer">Tiempos y disponibilidad ficticios</div>
+      <div class="ga-times-disclaimer">
+        Capacidad total: <strong>${zona.capacidad} plazas</strong> · Libres actuales: <strong>${zona.capacidad - zona.ocupadasAhora}</strong>
+      </div>
     </div>
 
     ${explicacion}
@@ -103,7 +124,9 @@ export function renderDetalle(zonaId: string): void {
       <span class="ga-btn-arrow-blue">→</span>
     </button>
 
-    <div class="ga-disclaimer">Datos simulados · no garantiza plaza</div>
+    <div class="ga-disclaimer">
+      ${esReal ? 'Datos oficiales de movilidad del Ayto. de Granada · no garantiza plaza' : 'Datos simulados · no garantiza plaza'}
+    </div>
   `;
 
   // Event listeners
@@ -112,7 +135,6 @@ export function renderDetalle(zonaId: string): void {
   });
 
   document.getElementById('btn-ir-zona')?.addEventListener('click', () => {
-    // Mostrar toast de navegación simulada
     const toastContainer = document.getElementById('ga-toast-container');
     if (toastContainer) {
       const toastEl = document.createElement('div');
@@ -121,7 +143,7 @@ export function renderDetalle(zonaId: string): void {
       toastEl.innerHTML = `
         <div class="d-flex">
           <div class="toast-body d-flex align-items-center gap-2">
-            <strong>Navegación simulada</strong> — En una app real, se abriría Google Maps hacia ${zona.nombre}.
+            <strong>Navegación simulada</strong> — En la versión final se abriría la ruta hacia ${zona.nombre}.
           </div>
           <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
         </div>
@@ -134,7 +156,6 @@ export function renderDetalle(zonaId: string): void {
   });
 
   document.getElementById('btn-activar-aviso')?.addEventListener('click', () => {
-    // Activar escenario de alerta y navegar a avisos
     state.escenarioActivo = 'alerta';
     state.zonaSeleccionada = zonaId;
     navigateTo('alertas');
