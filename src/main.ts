@@ -14,9 +14,14 @@ addRoute('inicio', () => {
   renderInicio();
 });
 
+addRoute('detalle/:id', (zonaId?: string) => {
+  showView('view-detalle');
+  renderDetalle(zonaId ?? (state.modoDatos === 'real' ? 'rex' : 'B'));
+});
+
 addRoute('detalle/', (zonaId?: string) => {
   showView('view-detalle');
-  renderDetalle(zonaId ?? 'B');
+  renderDetalle(zonaId ?? (state.modoDatos === 'real' ? 'rex' : 'B'));
 });
 
 addRoute('alertas', () => {

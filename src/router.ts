@@ -50,7 +50,7 @@ function resolveRoute(): void {
   const hash = window.location.hash.slice(1) || 'inicio';
 
   for (const route of routes) {
-    // Ruta con parámetro: "detalle/:id"
+    // Ruta con parámetro: "detalle/:id" o "detalle/"
     if (route.pattern.includes(':')) {
       const basePattern = route.pattern.split(':')[0];
       if (hash.startsWith(basePattern)) {
@@ -58,6 +58,10 @@ function resolveRoute(): void {
         route.handler(param);
         return;
       }
+    } else if (route.pattern.endsWith('/') && hash.startsWith(route.pattern)) {
+      const param = hash.slice(route.pattern.length);
+      route.handler(param);
+      return;
     }
     // Ruta exacta
     if (hash === route.pattern) {
