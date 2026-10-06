@@ -1,0 +1,257 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%" style="background:#F6F8FB; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Gradientes -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B2533" />
+      <stop offset="100%" stop-color="#202C3A" />
+    </linearGradient>
+
+    <linearGradient id="blueCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E75D8" />
+      <stop offset="100%" stop-color="#1769C2" />
+    </linearGradient>
+
+    <linearGradient id="metricGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <!-- Sombras -->
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.05"/>
+    </filter>
+
+    <!-- Estilos de Texto -->
+    <style>
+      .chip-text { font-size: 11px; font-weight: 700; fill: #FFFFFF; letter-spacing: 0.8px; text-transform: uppercase; }
+      .header-title { font-size: 26px; font-weight: 800; fill: #FFFFFF; }
+      .header-sub { font-size: 14px; fill: #A0B2C6; font-weight: 400; }
+      .card-title { font-size: 16px; font-weight: 700; fill: #202C3A; }
+      .card-sub { font-size: 12px; font-weight: 500; fill: #64748B; }
+      .body-text { font-size: 12px; fill: #475569; line-height: 1.5; }
+      .bullet-title { font-size: 13px; font-weight: 700; fill: #202C3A; }
+      .number-badge { font-size: 12px; font-weight: 800; fill: #FFFFFF; }
+    </style>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════════════
+       1. CABECERA: ENUNCIADO Y PRESENTACIÓN
+  ═══════════════════════════════════════════════════════════ -->
+  <g transform="translate(35, 30)" filter="url(#softShadow)">
+    <rect width="1130" height="135" rx="16" fill="url(#headerGrad)"/>
+    
+    <!-- Chip Reto -->
+    <rect x="30" y="24" width="85" height="22" rx="11" fill="#1769C2"/>
+    <text x="42" y="39" class="chip-text">RETO #07</text>
+
+    <!-- Tagline Solución -->
+    <rect x="125" y="24" width="220" height="22" rx="11" fill="#334155"/>
+    <text x="137" y="39" class="chip-text" fill="#93C5FD">SOLUCIÓN: GRANADA APARCA</text>
+
+    <!-- Enunciado Principal -->
+    <text x="30" y="78" class="header-title">
+      «Diseña una app que prediga la ocupación por zona y franja horaria para reducir vueltas»
+    </text>
+
+    <!-- Propuesta de Valor -->
+    <text x="30" y="108" class="header-sub">
+      Aparca con previsión, no dando vueltas · Decidir antes de entrar a la zona congestionada comparando aforo estimado a la llegada
+    </text>
+
+    <!-- Logotipo P -->
+    <circle cx="1065" cy="67" r="32" fill="#1769C2" />
+    <text x="1055" y="79" font-size="34" font-weight="900" fill="#FFFFFF">P</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════
+       2. TRES BLOQUES CENTRALES: PROBLEMA, MECÁNICA Y PANTALLAS
+  ═══════════════════════════════════════════════════════════ -->
+
+  <!-- COLUMNA 1: EL PROBLEMA (TRÁFICO DE AGITACIÓN) -->
+  <g transform="translate(35, 185)" filter="url(#cardShadow)">
+    <rect width="360" height="425" rx="14" fill="#FFFFFF" stroke="#DFE5EB"/>
+    <rect width="360" height="8" rx="4" fill="#DC2626"/>
+
+    <!-- Cabecera Tarjeta 1 -->
+    <circle cx="36" cy="42" r="16" fill="#FEE2E2"/>
+    <text x="29" y="47" font-size="16">🚦</text>
+    <text x="64" y="40" class="card-title">1. El Problema a Resolver</text>
+    <text x="64" y="56" class="card-sub">Tráfico de agitación innecesario</text>
+
+    <!-- Ítem 1.1 -->
+    <g transform="translate(24, 85)">
+      <circle cx="14" cy="14" r="14" fill="#FEE2E2"/>
+      <text x="10" y="19" font-size="12" font-weight="800" fill="#B91C1C">✕</text>
+      <text x="38" y="12" class="bullet-title">La opción más cercana engaña</text>
+      <text x="38" y="28" class="body-text">El conductor se dirige al destino inmediato,</text>
+      <text x="38" y="43" class="body-text">encuentra 95% de ocupación y entra en bucle.</text>
+    </g>
+
+    <!-- Ítem 1.2 -->
+    <g transform="translate(24, 160)">
+      <circle cx="14" cy="14" r="14" fill="#FEE2E2"/>
+      <text x="10" y="19" font-size="12" font-weight="800" fill="#B91C1C">✕</text>
+      <text x="38" y="12" class="bullet-title">El dato actual no basta</text>
+      <text x="38" y="28" class="body-text">Conocer el aforo ahora no es útil si cambia</text>
+      <text x="38" y="43" class="body-text">durante los 15-20 minutos del trayecto.</text>
+    </g>
+
+    <!-- Ítem 1.3 -->
+    <g transform="translate(24, 235)">
+      <circle cx="14" cy="14" r="14" fill="#FEE2E2"/>
+      <text x="10" y="19" font-size="12" font-weight="800" fill="#B91C1C">✕</text>
+      <text x="38" y="12" class="bullet-title">Distracción al volante</text>
+      <text x="38" y="28" class="body-text">Buscar en marcha genera riesgo vial.</text>
+      <text x="38" y="43" class="body-text">La decisión debe tomarse <tspan font-weight="700">antes de conducir</tspan>.</text>
+    </g>
+
+    <!-- Cuadro resumen negativo -->
+    <rect x="20" y="325" width="320" height="75" rx="8" fill="#FFF5F5" stroke="#FECACA"/>
+    <text x="32" y="348" font-size="11" font-weight="700" fill="#991B1B">CONSECUENCIA URBANA:</text>
+    <text x="32" y="367" font-size="11" fill="#7F1D1D">Hasta un 30 % del tráfico del centro de Granada</text>
+    <text x="32" y="383" font-size="11" fill="#7F1D1D">son coches dando vueltas buscando aparcamiento.</text>
+  </g>
+
+  <!-- COLUMNA 2: LA SOLUCIÓN Y EL MOTOR PREDICTIVO -->
+  <g transform="translate(420, 185)" filter="url(#cardShadow)">
+    <rect width="360" height="425" rx="14" fill="#FFFFFF" stroke="#1769C2" stroke-width="1.5"/>
+    <rect width="360" height="8" rx="4" fill="#1769C2"/>
+
+    <!-- Cabecera Tarjeta 2 -->
+    <circle cx="36" cy="42" r="16" fill="#EFF5FF"/>
+    <text x="29" y="47" font-size="16">🧠</text>
+    <text x="64" y="40" class="card-title">2. Cómo Funciona Granada Aparca</text>
+    <text x="64" y="56" class="card-sub" fill="#1769C2">Previsión a la llegada + Ponderación</text>
+
+    <!-- Paso 2.1: Entradas -->
+    <g transform="translate(20, 75)">
+      <rect width="320" height="58" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <rect x="8" y="8" width="22" height="22" rx="6" fill="#1769C2"/>
+      <text x="15" y="23" class="number-badge">A</text>
+      <text x="38" y="22" font-size="12" font-weight="700" fill="#202C3A">Entrada de Parámetros</text>
+      <text x="38" y="38" font-size="11" fill="#64748B">Destino + Hora estimada llegada + Máx a pie</text>
+    </g>
+
+    <!-- Paso 2.2: Predicción -->
+    <g transform="translate(20, 142)">
+      <rect width="320" height="68" rx="8" fill="#EFF5FF" stroke="#BFDBFE"/>
+      <rect x="8" y="8" width="22" height="22" rx="6" fill="#1769C2"/>
+      <text x="15" y="23" class="number-badge">B</text>
+      <text x="38" y="22" font-size="12" font-weight="700" fill="#1769C2">Motor de Previsión Determinista</text>
+      <text x="38" y="38" font-size="11" font-weight="600" fill="#1E40AF">Ocupadas = limitar(Actuales + Δ, 0, Capacidad)</text>
+      <text x="38" y="54" font-size="10" fill="#60A5FA">Reglas transparentes sin inventar IA no validada</text>
+    </g>
+
+    <!-- Paso 2.3: Semáforo y Puntuación -->
+    <g transform="translate(20, 220)">
+      <rect width="320" height="98" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <rect x="8" y="8" width="22" height="22" rx="6" fill="#1769C2"/>
+      <text x="15" y="23" class="number-badge">C</text>
+      <text x="38" y="22" font-size="12" font-weight="700" fill="#202C3A">Puntuación Total de Decisión</text>
+      <text x="38" y="38" font-size="11" font-weight="700" fill="#202C3A">Coste = T.Coche + T.Pie + Penalización</text>
+      
+      <!-- Pills semáforo -->
+      <rect x="38" y="48" width="80" height="18" rx="4" fill="#D7E9DD"/>
+      <text x="44" y="61" font-size="9" font-weight="700" fill="#14532D">Verde: +0m</text>
+
+      <rect x="124" y="48" width="86" height="18" rx="4" fill="#FBEBDE"/>
+      <text x="130" y="61" font-size="9" font-weight="700" fill="#93500D">Ámbar: +5m</text>
+
+      <rect x="216" y="48" width="80" height="18" rx="4" fill="#FCECE9"/>
+      <text x="222" y="61" font-size="9" font-weight="700" fill="#B33B32">Rojo: +10m</text>
+
+      <text x="38" y="84" font-size="10" fill="#64748B">Desempate: Menor % previsto ➔ Menor caminata</text>
+    </g>
+
+    <!-- Disclaimer legal y transparente -->
+    <rect x="20" y="328" width="320" height="72" rx="8" fill="#F0FDF4" stroke="#BBF7D0"/>
+    <text x="32" y="350" font-size="11" font-weight="700" fill="#166534">TRANSPARENCIA AL CONDUCTOR:</text>
+    <text x="32" y="368" font-size="11" fill="#15803D">La app no garantiza ni reserva plaza física;</text>
+    <text x="32" y="384" font-size="11" fill="#15803D">muestra probabilidades para optimizar la ruta.</text>
+  </g>
+
+  <!-- COLUMNA 3: LAS 3 PANTALLAS INTERACTIVAS (PROTOTIPO FIGMA) -->
+  <g transform="translate(805, 185)" filter="url(#cardShadow)">
+    <rect width="360" height="425" rx="14" fill="#FFFFFF" stroke="#DFE5EB"/>
+    <rect width="360" height="8" rx="4" fill="#059669"/>
+
+    <!-- Cabecera Tarjeta 3 -->
+    <circle cx="36" cy="42" r="16" fill="#D1FAE5"/>
+    <text x="29" y="47" font-size="16">📱</text>
+    <text x="64" y="40" class="card-title">3. Las 3 Pantallas Clave</text>
+    <text x="64" y="56" class="card-sub">Prototipo interactivo navegable</text>
+
+    <!-- Pantalla 1: INICIO -->
+    <g transform="translate(20, 80)">
+      <rect width="320" height="85" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <rect x="12" y="12" width="28" height="28" rx="6" fill="#202C3A"/>
+      <text x="20" y="31" font-size="14" fill="#FFFFFF">1</text>
+      <text x="50" y="24" class="bullet-title">PANTALLA DE INICIO</text>
+      <text x="50" y="40" font-size="11" fill="#64748B">Mapa esquemático + Comparativa de zonas.</text>
+      <text x="50" y="56" font-size="11" font-weight="600" fill="#1769C2">Destaca la Zona Recomendada</text>
+      <text x="50" y="70" font-size="10" fill="#94A3B8">(ej. Rex a las 15:00 / Zona B a las 18:15)</text>
+    </g>
+
+    <!-- Pantalla 2: DETALLE -->
+    <g transform="translate(20, 175)">
+      <rect width="320" height="85" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <rect x="12" y="12" width="28" height="28" rx="6" fill="#1769C2"/>
+      <text x="20" y="31" font-size="14" fill="#FFFFFF">2</text>
+      <text x="50" y="24" class="bullet-title">DETALLE DE LA ZONA</text>
+      <text x="50" y="40" font-size="11" fill="#64748B">Previsión grande + Comparativa Ahora vs Llegada.</text>
+      <text x="50" y="56" font-size="11" fill="#475569">Desglose de tiempos (Coche + Caminata).</text>
+      <text x="50" y="70" font-size="11" font-weight="600" fill="#059669">Botón «Ir a esta zona» (navegación simulada)</text>
+    </g>
+
+    <!-- Pantalla 3: ALERTAS -->
+    <g transform="translate(20, 270)">
+      <rect width="320" height="85" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <rect x="12" y="12" width="28" height="28" rx="6" fill="#D97706"/>
+      <text x="20" y="31" font-size="14" fill="#FFFFFF">3</text>
+      <text x="50" y="24" class="bullet-title">ALERTA Y ALTERNATIVA</text>
+      <text x="50" y="40" font-size="11" fill="#64748B">Simulación de empeoramiento durante trayecto.</text>
+      <text x="50" y="56" font-size="11" font-weight="600" fill="#D97706">Ofrece alternativa viable menos saturada</text>
+      <text x="50" y="70" font-size="10" fill="#94A3B8">(Avisos silenciados durante la conducción)</text>
+    </g>
+
+    <!-- Footer navegabilidad -->
+    <text x="180" y="390" text-anchor="middle" font-size="11" font-weight="600" fill="#059669">
+      ✓ Navegación por hash `#inicio`, `#detalle/:id`, `#alertas`
+    </text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════
+       3. FRANJA INFERIOR: MÉTRICA DE ÉXITO Y VALIDACIÓN
+  ═══════════════════════════════════════════════════════════ -->
+  <g transform="translate(35, 630)" filter="url(#softShadow)">
+    <rect width="1130" height="135" rx="14" fill="url(#blueCardGrad)"/>
+
+    <!-- Título de Métrica -->
+    <g transform="translate(35, 28)">
+      <rect width="160" height="24" rx="12" fill="rgba(255,255,255,0.2)"/>
+      <text x="16" y="16" class="chip-text">MÉTRICA DE ÉXITO</text>
+      <text x="0" y="54" font-size="22" font-weight="800" fill="#FFFFFF">
+        Objetivo: Reducción del 10 % en el Tiempo de Búsqueda
+      </text>
+      <text x="0" y="78" font-size="13" fill="#DCEBFA">
+        Medido estrictamente desde la llegada a la zona de destino hasta estacionar el vehículo, frente a buscar sin la app.
+      </text>
+    </g>
+
+    <!-- Tarjeta de Validación -->
+    <g transform="translate(730, 24)">
+      <rect width="365" height="88" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="20" y="28" font-size="13" font-weight="700" fill="#FFFFFF">⚖️ Compromiso y Rigor Técnico</text>
+      <text x="20" y="50" font-size="11" fill="#E2E8F0">
+        • Es un objetivo cuantitativo pendiente de piloto experimental.
+      </text>
+      <text x="20" y="68" font-size="11" fill="#E2E8F0">
+        • Se evaluará mediante pruebas con trayectos y franjas comparables.
+      </text>
+    </g>
+  </g>
+</svg>
