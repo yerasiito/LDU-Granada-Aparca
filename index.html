@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Granada Aparca — app conceptual que compara zonas de aparcamiento según su ocupación prevista" />
+    <title>Granada Aparca</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Contenedor tipo móvil -->
+      <div class="ga-phone">
+        <div class="ga-screen">
+          <!-- Vistas (solo una visible a la vez) -->
+          <div id="view-inicio" class="ga-view"></div>
+          <div id="view-detalle" class="ga-view" style="display:none"></div>
+          <div id="view-alertas" class="ga-view" style="display:none"></div>
+          <div id="view-perfil" class="ga-view" style="display:none"></div>
+        </div>
+
+        <!-- Bottom navigation (fija) -->
+        <nav class="ga-bottom-nav">
+          <div class="ga-nav-item active" data-view="view-inicio">
+            <span class="ga-nav-icon">🏠</span>
+            <span class="ga-nav-label">Inicio</span>
+          </div>
+          <div class="ga-nav-item" data-view="view-alertas">
+            <span class="ga-nav-icon">🔔</span>
+            <span class="ga-nav-label">Avisos</span>
+          </div>
+          <div class="ga-nav-item" data-view="view-perfil">
+            <span class="ga-nav-icon">👤</span>
+            <span class="ga-nav-label">Perfil</span>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Toast container global -->
+    <div id="ga-toast-container" class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:9999"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
